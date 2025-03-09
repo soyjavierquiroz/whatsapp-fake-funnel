@@ -1,6 +1,13 @@
 import { useState } from "react";
 import conversations from "../data/conversation";
 
+// Función para reproducir sonidos
+const playSound = (type) => {
+  const sound = new Audio(`/sounds/${type}.mp3`);
+  sound.play();
+};
+
+
 export default function Chatbot() {
   const conversationId = "janny-helguero"; // Se puede cambiar dinámicamente en el futuro
   const conversation = conversations[conversationId];
@@ -18,6 +25,9 @@ export default function Chatbot() {
       return;
     }
 
+    // 🔹 Reproducir sonido de mensaje enviado
+    playSound("sent");
+
     // Agregar respuesta del usuario
     setMessages(prev => [...prev, { text, sender: "user" }]);
 
@@ -32,6 +42,9 @@ export default function Chatbot() {
           console.error("🚨 ERROR: No se encontró un mensaje.");
           return;
         }
+
+    // 🔹 Reproducir sonido de mensaje recibido
+    playSound("received");
 
         setMessages(prev => prev.filter(msg => !msg.typing)); // Eliminar "escribiendo..."
         setMessages(prev => [...prev, { text: nextMessage.text, sender: "bot", options: nextMessage.options || [] }]);
