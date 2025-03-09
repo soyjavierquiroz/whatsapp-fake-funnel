@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import conversations from "../data/conversation";
 
 // Función para reproducir sonidos
@@ -6,7 +6,6 @@ const playSound = (type) => {
   const sound = new Audio(`/sounds/${type}.mp3`);
   sound.play();
 };
-
 
 export default function Chatbot() {
   const conversationId = "janny-helguero"; // Se puede cambiar dinámicamente en el futuro
@@ -38,16 +37,24 @@ export default function Chatbot() {
 
       setTimeout(() => {
         const nextMessage = conversation.messages[step];
-        if (!nextMessage || !nextMessage.text) {
+        if (!nextMessage || (!nextMessage.text && !nextMessage.image)) {
           console.error("🚨 ERROR: No se encontró un mensaje.");
           return;
         }
 
-    // 🔹 Reproducir sonido de mensaje recibido
-    playSound("received");
+        // 🔹 Reproducir sonido de mensaje recibido
+        playSound("received");
 
         setMessages(prev => prev.filter(msg => !msg.typing)); // Eliminar "escribiendo..."
-        setMessages(prev => [...prev, { text: nextMessage.text, sender: "bot", options: nextMessage.options || [] }]);
+        setMessages(prev => [
+          ...prev,
+          {
+            text: nextMessage.text || "",
+            image: nextMessage.image || null, // Asegurar que se pueda mostrar imágenes
+            sender: "bot",
+            options: nextMessage.options || []
+          }
+        ]);
 
         if (nextMessage.options && nextMessage.options.length > 0) {
           setCurrentStep(step);
@@ -55,6 +62,15 @@ export default function Chatbot() {
       }, 2000); // Simula el tiempo de escritura
     }, 500);
   };
+
+  const chatBodyRef = useRef(null);
+
+  useEffect(() => {
+    if (chatBodyRef.current) {
+      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+    }
+  }, [messages]); // Se ejecuta cada vez que se actualizan los mensajes
+
 
   return (
     <div className="chat-wrapper">
@@ -74,7 +90,7 @@ export default function Chatbot() {
         </div>
 
         {/* Cuerpo del Chat */}
-        <div className="chat-body">
+        <div className="chat-body" ref={chatBodyRef}>
           {messages.map((msg, index) => (
             <div key={index} className={`message-wrapper ${msg.sender}`}>
               {msg.sender === "bot" && <img src={conversation.avatar} alt="Avatar" className="avatar-msg" />}
@@ -84,7 +100,10 @@ export default function Chatbot() {
                     <span></span><span></span><span></span>
                   </div>
                 ) : (
-                  msg.text
+                  <>
+                    {msg.text && <p>{msg.text}</p>}
+                    {msg.image && <img src={msg.image} alt="Imagen enviada" className="chat-image" />} 
+                  </>
                 )}
               </div>
             </div>
@@ -165,6 +184,13 @@ export default function Chatbot() {
           padding: 15px;
           background: #ece5dd;
           margin-top: 60px;
+          scrollbar-width: none; /* 🔹 Oculta scrollbar en Firefox */
+          -ms-overflow-style: none; /* 🔹 Oculta scrollbar en IE y Edge */
+        }
+
+        /* 🔹 Oculta scrollbar en Chrome y Safari */
+        .chat-body::-webkit-scrollbar {
+          display: none;
         }
 
         .message-wrapper {
@@ -204,6 +230,12 @@ export default function Chatbot() {
           height: 35px;
           border-radius: 50%;
           margin-right: 10px;
+        }
+
+        .chat-image {
+          max-width: 100%;
+          border-radius: 8px;
+          margin-top: 5px;
         }
 
         .chat-footer {
@@ -246,16 +278,6 @@ export default function Chatbot() {
           background-color: gray;
           border-radius: 50%;
           animation: typingAnimation 1.5s infinite;
-        }
-
-        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typingAnimation {
-          0% { opacity: 0.3; transform: translateY(0px); }
-          50% { opacity: 1; transform: translateY(-5px); }
-          100% { opacity: 0.3; transform: translateY(0px); }
         }
       `}</style>
     </div>

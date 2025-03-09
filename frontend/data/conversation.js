@@ -4,26 +4,27 @@ const conversations = {
     avatar: "/avatars/janny.png",
     messages: [
       {
-        text: "👋 ¡Hola! Soy Janny. Quiero ayudarte con un contenido especial. ¿Te gustaría recibirlo? 😊",
+        text: "👋 Hola, soy Janny. ¿Te gustaría recibir un contenido especial?",
         options: [
-          { text: "¡Sí, quiero empezar! 🚀", next: 1 }
+          { text: "¡Sí, quiero empezar!", next: 1 }
         ]
       },
       {
-        text: "¿Por qué estás interesado en este contenido? 🤔",
+        text: "Aquí tienes una imagen relacionada con el contenido.",
+        image: "/images/example.jpg",  // Asegúrate de que la ruta es relativa a `public/`
         options: [
-          { text: "Enfermedad Celíaca 🍞🚫", next: 2 },
-          { text: "Diabetes 🍬", next: 2 },
-          { text: "Alergia al trigo 🌾", next: 2 },
-          { text: "Intolerancia al Gluten ❌", next: 2 },
-          { text: "Mejor alimentación 🥗", next: 2 }
+          { text: "¡Genial!", next: 2 }
         ]
       },
       {
-        text: "¡Gracias! Te enviaré información relevante 📩.",
-        options: []
+        text: "¿Te gustaría recibir más información?",
+        options: [
+          { text: "Sí, quiero saber más", next: 3 },
+          { text: "No, gracias", next: 4 }
+        ]
       }
     ]
   }
 };
+
 export default conversations;
