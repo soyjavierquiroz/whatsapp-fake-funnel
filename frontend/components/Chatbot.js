@@ -4,6 +4,7 @@ import ChatHeader from "./ChatHeader";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
 import SoundPlayer from "./SoundPlayer";
+import UserForm from "./UserForm"; // ✅ Importamos el nuevo formulario
 import styles from "../styles/Chatbot.module.css"; 
 
 export default function Chatbot() {
@@ -15,6 +16,7 @@ export default function Chatbot() {
   ]);
 
   const [currentStep, setCurrentStep] = useState(0);
+  const [showForm, setShowForm] = useState(false); // ✅ Estado para mostrar el formulario
   const chatBodyRef = useRef(null);
 
   useEffect(() => {
@@ -30,6 +32,12 @@ export default function Chatbot() {
     SoundPlayer("sent"); // Reproduce sonido de mensaje enviado
     setMessages(prev => [...prev, { text, sender: "user" }]);
     setCurrentStep(null); // Oculta botones
+
+    // ✅ Mostrar formulario si estamos en el paso de captura de datos
+    if (step === 2) {
+      setTimeout(() => setShowForm(true), 1000);
+      return;
+    }
 
     setTimeout(() => {
       setMessages(prev => [...prev, { sender: "bot", typing: true }]); // Simula "escribiendo..."
@@ -52,12 +60,26 @@ export default function Chatbot() {
     }, 500);
   };
 
+  // ✅ Manejo del envío del formulario
+  const handleFormSubmit = (formData) => {
+    console.log("Datos capturados:", formData);
+    setShowForm(false);
+    // Aquí podríamos enviar los datos a una API
+  };
+
   return (
     <div className={styles.chatWrapper}>
       <div className={styles.chatContainer}>
         <ChatHeader avatar={conversation.avatar} name={conversation.name} />
-        <ChatBody messages={messages} chatBodyRef={chatBodyRef} avatar={conversation.avatar} />
-        <ChatFooter options={currentStep !== null ? conversation.messages[currentStep]?.options : []} onOptionClick={handleOptionClick} />
+        {/* ✅ Si showForm está activo, mostramos el formulario en lugar del chat */}
+        {showForm ? (
+          <UserForm onSubmit={handleFormSubmit} />
+        ) : (
+          <>
+            <ChatBody messages={messages} chatBodyRef={chatBodyRef} avatar={conversation.avatar} />
+            <ChatFooter options={currentStep !== null ? conversation.messages[currentStep]?.options : []} onOptionClick={handleOptionClick} />
+          </>
+        )}
       </div>
     </div>
   );

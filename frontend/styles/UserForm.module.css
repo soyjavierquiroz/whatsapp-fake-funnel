@@ -1,0 +1,199 @@
+/* 🔹 Fondo semitransparente para que se vea sobre el chat */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 🔹 Formulario centrado */
+.formContainer {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 350px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* 🔹 Título del formulario */
+.formTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 15px;
+}
+
+/* 🔹 Subtítulo del formulario */
+.formSubTitle {
+  font-size: 14px;
+  color: #303030;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 🔹 Disclaimer del formulario */
+.formDisclaimer {
+  font-size: 10px;
+  color: #4b4b4b;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 🔹 Estilo de los inputs */
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* 🔹 Asegurar que los íconos sean diferentes para cada campo */
+.inputGroup.name::before {
+  content: "👤"; /* Icono de persona */
+}
+
+.inputGroup.phone::before {
+  content: "📞"; /* Icono de teléfono */
+}
+
+.inputGroup.email::before {
+  content: "📧"; /* Icono de correo */
+}
+
+/* 🔹 Posicionamiento del icono a la izquierda dentro del input */
+.inputGroup::before {
+  font-size: 16px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.input, .phoneInput {
+  background: white;
+  color: black;
+  padding-left: 10px;
+  width: 90%;
+  max-width: 280px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* 🔹 Estilos cuando el campo está lleno */
+.input.filled, 
+.phoneInput.filled {
+  background: #f5f5f5; /* Color más claro */
+  color: black;
+}
+
+
+.phoneInput {
+  flex-grow: 1;  /* 🔹 Hace que el input tome todo el espacio disponible */
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 0 5px 5px 0;  /* 🔹 Redondeado solo en el lado derecho */
+  background: white;
+  color: black;
+  width: 100%;
+}
+
+
+/* 🔹 Ajuste del input de teléfono */
+.phoneContainer {
+  display: flex;
+  width: 90%;  /* 🔹 Igual que los otros inputs */
+  max-width: 280px;  /* 🔹 Mantiene el ancho adecuado */
+  margin: 0 auto;
+  margin-top: 15px;  /* ⬅ Espacio entre campos */
+  margin-bottom: 15px;  /* ⬅ Espacio entre campos */
+}
+
+.phoneButton {
+  border-radius: 5px 0 0 5px;  /* 🔹 Redondeado solo en el lado izquierdo */
+  border: 1px solid #cccccc;
+  background: white;
+}
+
+/* 🔹 Estilo del botón de enviar */
+.submitButton {  
+  background: #064e45;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 90%;
+}
+
+.submitButton:hover {
+  background: #23826c;
+}
+
+
+/* 🔹 Tooltips de error flotantes */
+.tooltip {
+  position: absolute;
+  top: 20px;
+  left: 190px;
+  background: rgba(230, 77, 57, 0.9);
+  color: white;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+  transition: opacity 0.3s ease-in-out;
+}
+
+
+/* 🔹 Estilos de la lista desplegable de países */
+.react-tel-input .country-list {
+  background-color: white !important;  /* 🔹 Fondo blanco */
+  color: black !important;  /* 🔹 Texto negro */
+  text-align: left !important;  /* 🔹 Alinea el texto */
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Ajusta el espaciado de los países dentro de la lista */
+.react-tel-input .country-list .country {
+  display: flex;
+  align-items: left;
+  padding: 8px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* 🔹 Asegurar que el nombre del país sea visible */
+.react-tel-input .country-list .country span {
+  color: black !important;
+  margin-left: 10px; /* 🔹 Espaciado entre bandera y nombre */
+}
+
+/* 🔹 Resalta el país seleccionado */
+.react-tel-input .country-list .country.highlight {
+  background-color: #ffffff !important;
+}
+
+/* 🔹 Estilos específicos para el menú desplegable */
+.phoneDropdown {
+  background-color: rgb(255, 255, 255) !important;
+  color: black !important;
+}
