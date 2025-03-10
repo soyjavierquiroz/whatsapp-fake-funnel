@@ -1,21 +1,21 @@
-import React from "react";
 import styles from "../styles/Chatbot.module.css";
 
-const ChatHeader = ({ avatar, name }) => {
+export default function ChatHeader({ avatar, name }) {
   return (
     <div className={styles.chatHeader}>
-      <img src={avatar} alt={name} className={styles.avatar} />
-      <div className={styles.chatInfo}>
-        <strong>{name}</strong>
-        <p>Online</p>
+      <div className={styles.headerLeft}>
+        <span className={styles.backButton}>←</span> 
+        <img src={avatar} alt={name} className={styles.avatar} />
+        <div className={styles.userInfo}>
+          <strong>{name}</strong>
+          <p>Online</p>
+        </div>
       </div>
       <div className={styles.icons}>
-        <span>📞</span>
-        <span>📎</span>
-        <span>≡</span>
+        <span className={styles.icon}>📞</span>
+        <span className={styles.icon}>📎</span>
+        <span className={styles.icon}>≡</span>
       </div>
     </div>
   );
-};
-
-export default ChatHeader;
+}
