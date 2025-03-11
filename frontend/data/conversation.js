@@ -8,41 +8,23 @@ const conversations = {
         options: [{ text: "¡Sí, quiero empezar!", next: 1 }]
       },
       {
-        text: "Aquí tienes una imagen relacionada con el contenido.",
-        image: "/images/example.jpg", // 📌 Asegúrate de que la ruta de la imagen sea correcta
-        options: [{ text: "¡Genial!", next: 2 }]
+        text: "Mira este video exclusivo sobre el tema 👇",
+        videoThumbnail: "/images/video-thumbnail.jpg",
+        videoMobile: "https://www.youtube.com/embed/du2unbKhtZo",
+        videoDesktop: "https://www.youtube.com/embed/du2unbKhtZo",
+        options: [{ text: "¡Quiero ver más!", next: 2 }]
       },
       {
         text: "¿Te gustaría recibir más información?",
-        options: [
-          { text: "Sí, quiero saber más", next: 3 },
-          { text: "No, gracias", next: 4 }
-        ]
-      }
-    ]
-  },
-
-  "dr-maria": {
-    name: "Dra. Maria",
-    avatar: "/avatars/maria.png",
-    messages: [
-      {
-        text: "👋 Hola, soy la Dra. Maria. ¿Por qué necesitas recetas sin gluten?",
-        options: [
-          { text: "Intolerancia al gluten", next: 1 },
-          { text: "Mejor alimentación", next: 2 }
-        ]
+        options: [{ text: "Sí, quiero saber más", next: 3 }, { text: "No, gracias", next: 4 }]
       },
       {
-        text: "Perfecto... Sé exactamente cómo te sientes.",
-        options: [{ text: "¡Continuar!", next: 3 }]
-      },
-      {
-        text: "Esa frustración de no poder disfrutar lo que otros comen sin preocuparte por el gluten o el azúcar No existirá más.",
-        options: [{ text: "Quiero saber más", next: 4 }]
+        text: "Déjame tus datos en el formulario 📋",
+        form: true
       }
     ]
   }
 };
 
 export default conversations;
+

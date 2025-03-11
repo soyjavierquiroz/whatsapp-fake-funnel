@@ -231,3 +231,25 @@
     padding: 10px;
   }
 }
+
+/* 🔹 Contenedor de la miniatura del video */
+.videoThumbnail {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* 🔹 Botón de "play" sobre la miniatura */
+.videoPlayButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
