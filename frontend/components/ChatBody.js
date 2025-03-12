@@ -24,4 +24,3 @@ export default function ChatBody({ messages, avatar, onOpenVideo }) {
     </div>
   );
 }
-

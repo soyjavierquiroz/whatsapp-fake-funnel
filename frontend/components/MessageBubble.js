@@ -6,7 +6,14 @@ export default function MessageBubble({ message, avatar }) {
   const [showVideo, setShowVideo] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
 
-  const isMobile = /iPhone|iPad|Android/i.test(navigator.userAgent);
+  // 🔹 Estado para detectar si es móvil
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setIsMobile(/iPhone|iPad|Android/i.test(navigator.userAgent));
+    }
+  }, []);
 
   useEffect(() => {
     if (showVideo) {
@@ -28,11 +35,13 @@ export default function MessageBubble({ message, avatar }) {
             <>
               {message.text && <p>{message.text}</p>}
 
+              {/* 🔹 Si el mensaje tiene una imagen estática */}
               {message.image && !message.videoMobile && !message.videoDesktop && (
                 <img src={message.image} alt="Imagen" className={styles.chatImage} />
               )}
 
-              {message.videoThumbnail && message.videoMobile && message.videoDesktop && (
+              {/* 🔹 Si el mensaje es un video (miniatura con botón) */}
+              {message.videoMobile && message.videoDesktop && (
                 <div className={styles.videoThumbnail} onClick={() => setShowVideo(true)}>
                   <img src={message.videoThumbnail} alt="Miniatura del video" className={styles.chatImage} />
                   <button className={styles.videoPlayButton}>▶</button>
@@ -43,6 +52,7 @@ export default function MessageBubble({ message, avatar }) {
         </div>
       </div>
 
+      {/* 🔹 Mostrar el modal si el usuario hace clic en la miniatura del video */}
       {showVideo && <VideoModal videoUrl={videoUrl} onClose={() => setShowVideo(false)} />}
     </>
   );
