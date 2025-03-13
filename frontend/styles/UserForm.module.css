@@ -14,7 +14,7 @@
 
 /* 🔹 Formulario centrado */
 .formContainer {
-  background: #ffffff;
+  background: #f3f3f3;
   padding: 20px;
   border-radius: 10px;
   max-width: 350px;
@@ -24,10 +24,9 @@
   position: relative;
 }
 
-
 /* 🔹 Título del formulario */
 .formTitle {
-  font-size: 24px; /* 🔹 Aumentado en 2 puntos */
+  font-size: 24px;
   font-weight: bold;
   color: #000000;
   margin-bottom: 15px;
@@ -49,27 +48,24 @@
   margin-bottom: 20px;
 }
 
+/* 🔹 Estilo de los inputs */
 .inputGroup {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px; /* 🔹 Espaciado entre el icono y el input */
 }
 
 /* 🔹 Asegurar que los íconos sean diferentes para cada campo */
 .inputGroup.name::before {
   content: "👤"; /* Icono de persona */
-  left: -5px; /* 🔹 Mayor separación con el texto */
 }
 
 .inputGroup.phone::before {
   content: "📞"; /* Icono de teléfono */
-  left: -5px; /* 🔹 Mayor separación con el texto */
 }
 
 .inputGroup.email::before {
   content: "📧"; /* Icono de correo */
-  left: -5px; /* 🔹 Mayor separación con el texto */
 }
 
 /* 🔹 Posicionamiento del icono a la izquierda dentro del input */
@@ -82,39 +78,37 @@
   color: #888;
 }
 
-/* 🔹 Ajuste del tamaño de los inputs */
 .input, .phoneInput {
   background: white;
   color: black;
-  padding-left: 35px; /* 🔹 Mayor espacio para los iconos */
+  padding-left: 10px;
   width: 90%;
   max-width: 280px;
-  padding: 12px; /* 🔹 Aumentado el padding */
-  font-size: 18px; /* 🔹 Aumentado en 2 puntos */
+  padding: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
   display: block;
   margin: 0 auto;
-  margin-top: 10 px; /* 🔹 Reducido el espacio entre campos */
-  margin-bottom: 10px; /* 🔹 Reducido el espacio entre campos */
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 /* 🔹 Estilos cuando el campo está lleno */
 .input.filled, 
 .phoneInput.filled {
-  background: #f5f5f5; /* Color más claro */
+  background: #eaeaea; /* Color más claro */
   color: black;
 }
 
 
-/* 🔹 Ajuste del input de teléfono */
 .phoneInput {
-  flex-grow: 1;
-  padding: 12px; /* 🔹 Aumentado */
-  font-size: 18px; /* 🔹 Fuente más grande */
+  flex-grow: 1;  /* 🔹 Hace que el input tome todo el espacio disponible */
+  padding: 10px;
+  font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0;  /* 🔹 Redondeado solo en el lado derecho */
   background: white;
   color: black;
   width: 100%;
@@ -142,40 +136,26 @@
   background: #d70007;
   color: white;
   border: none;
-  padding: 14px; /* 🔹 Aumentado el tamaño */
+  padding: 14px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 18px; /* 🔹 Aumentado en 2 puntos */
+  font-size: 18px;
   width: 90%;
   transition: transform 0.3s ease, background 0.3s ease;
-  animation: growAppear 0.4s ease-out; /* 🔹 Efecto Grow al aparecer */
+  animation: growAppear 0.4s ease-out;
 }
 
 /* 🔹 Efecto al pasar el mouse sobre el botón */
 .submitButton:hover {
   background: #23826c;
-  animation: pulseGrow 0.5s ease-in-out; /* 🔹 Efecto Pulse-Grow */
+  animation: pulseGrow 0.5s ease-in-out;
 }
-
-/* 🔹 Animación de aparición */
-@keyframes growAppear {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* 🔹 Animación de pulsación en hover */
-@keyframes pulseGrow {
-  0% { transform: scale(0.95); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(0.95); }
-}
-
 
 /* 🔹 Tooltips de error flotantes */
 .tooltip {
   position: absolute;
-  top: 35px;
-  left: 150px;
+  top: 45px;
+  left: 190px;
   background: rgba(230, 77, 57, 0.9);
   color: white;
   font-size: 14px;
@@ -185,9 +165,10 @@
   transition: opacity 0.3s ease-in-out;
 }
 
+
 /* 🔹 Estilos de la lista desplegable de países */
 .react-tel-input .country-list {
-  background-color: white !important;  /* 🔹 Fondo blanco */
+  background-color: rgb(240, 240, 240) !important;  /* 🔹 Fondo blanco */
   color: black !important;  /* 🔹 Texto negro */
   text-align: left !important;  /* 🔹 Alinea el texto */
   border-radius: 5px;

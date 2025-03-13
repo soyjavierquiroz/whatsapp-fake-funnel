@@ -5,7 +5,7 @@ import VideoModal from "./VideoModal";
 export default function MessageBubble({ message, avatar }) {
   const [showVideo, setShowVideo] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
-
+  
   // 🔹 Estado para detectar si es móvil
   const [isMobile, setIsMobile] = useState(false);
 
@@ -60,8 +60,17 @@ export default function MessageBubble({ message, avatar }) {
         </div>
       </div>
 
-      {/* 🔹 Mostrar el modal si el usuario hace clic en la miniatura del video */}
-      {showVideo && <VideoModal videoUrl={videoUrl} onClose={() => setShowVideo(false)} />}
+      {/* 🔹 Mostrar el modal con título, subtítulo y CTA */}
+      {showVideo && (
+        <VideoModal
+          videoUrl={videoUrl}
+          title={message.videoTitle || "Mira este video especial"}
+          subtitle={message.videoSubtitle || "Este contenido es exclusivo para ti"}
+          ctaText={message.ctaText || "¡Ver más!"}
+          ctaLink={message.ctaLink || "https://www.tuweb.com/oferta"}
+          onClose={() => setShowVideo(false)}
+        />
+      )}
     </>
   );
 }
