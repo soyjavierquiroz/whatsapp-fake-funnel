@@ -37,13 +37,21 @@ export default function MessageBubble({ message, avatar }) {
 
               {/* 🔹 Si el mensaje tiene una imagen estática */}
               {message.image && !message.videoMobile && !message.videoDesktop && (
-                <img src={message.image} alt="Imagen" className={styles.chatImage} />
+                <img 
+                  src={message.image} 
+                  alt="Imagen" 
+                  className={styles.chatImage} 
+                />
               )}
 
               {/* 🔹 Si el mensaje es un video (miniatura con botón) */}
               {message.videoMobile && message.videoDesktop && (
                 <div className={styles.videoThumbnail} onClick={() => setShowVideo(true)}>
-                  <img src={message.videoThumbnail} alt="Miniatura del video" className={styles.chatImage} />
+                  <img 
+                    src={message.videoThumbnail} 
+                    alt="Miniatura del video" 
+                    className={styles.chatImage} 
+                  />
                   <button className={styles.videoPlayButton}>▶</button>
                 </div>
               )}

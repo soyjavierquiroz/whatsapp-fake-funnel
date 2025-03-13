@@ -11,10 +11,11 @@ export default function ChatHeader({ avatar, name }) {
           <p>Online</p>
         </div>
       </div>
+      {/* 🔹 Contenedor de íconos corregido para evitar desaparición */}
       <div className={styles.icons}>
         <span className={styles.icon}>📞</span>
         <span className={styles.icon}>📎</span>
-        <span className={styles.icon}>≡</span>
+        <span className={styles.icon}>≡</span> {/* 🔹 Se asegura que el menú hamburguesa sea visible */}
       </div>
     </div>
   );

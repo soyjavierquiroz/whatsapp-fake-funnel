@@ -19,7 +19,6 @@ export default function ChatBody({ messages, avatar, onOptionSelect }) {
     }
   }, [messages]);
 
-  // 🔹 Encuentra el último mensaje del bot con opciones
   const lastBotMessageWithOptions = messages
     .slice()
     .reverse()
@@ -33,13 +32,12 @@ export default function ChatBody({ messages, avatar, onOptionSelect }) {
         </div>
       ))}
 
-      {/* 🔹 Renderizar botones solo si hay opciones disponibles */}
       {lastBotMessageWithOptions && lastBotMessageWithOptions.options.length > 0 && (
         <div className={styles.actionButtons} ref={actionRef}>
           {lastBotMessageWithOptions.options.map((option, i) => (
             <button
               key={i}
-              className={styles.optionButton}
+              className={`${styles.optionButton} ${styles.growButton}`} 
               onClick={() => onOptionSelect(option.text, Number(option.next))}
             >
               {option.text}
