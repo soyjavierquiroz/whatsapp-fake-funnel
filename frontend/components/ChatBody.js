@@ -4,17 +4,18 @@ import { useEffect, useRef } from "react";
 
 export default function ChatBody({ messages, avatar, onOptionSelect }) {
   const chatBodyRef = useRef(null);
+  const lastMessageRef = useRef(null);
   const actionRef = useRef(null);
 
   useEffect(() => {
-    if (chatBodyRef.current) {
-      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }, [messages]);
 
   useEffect(() => {
     if (actionRef.current) {
-      actionRef.current.scrollIntoView({ behavior: "smooth" });
+      actionRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }, [messages]);
 
@@ -27,7 +28,9 @@ export default function ChatBody({ messages, avatar, onOptionSelect }) {
   return (
     <div className={styles.chatBody} ref={chatBodyRef}>
       {messages.map((msg, index) => (
-        <MessageBubble key={index} message={msg} avatar={avatar} />
+        <div key={index} ref={index === messages.length - 1 ? lastMessageRef : null}>
+          <MessageBubble message={msg} avatar={avatar} />
+        </div>
       ))}
 
       {/* 🔹 Renderizar botones solo si hay opciones disponibles */}
@@ -44,9 +47,6 @@ export default function ChatBody({ messages, avatar, onOptionSelect }) {
           ))}
         </div>
       )}
-
-      {/* Ref para asegurar el scroll automático */}
-      <div ref={actionRef} />
     </div>
   );
 }

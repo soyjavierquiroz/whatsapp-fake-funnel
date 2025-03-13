@@ -23,7 +23,9 @@ export default function Chatbot() {
 
   useEffect(() => {
     if (chatBodyRef.current) {
-      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+      setTimeout(() => {
+        chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight - (chatBodyRef.current.clientHeight / 3);
+      }, 300);
     }
   }, [messages]);
 
@@ -92,7 +94,7 @@ export default function Chatbot() {
         <ChatBody 
           messages={messages} 
           avatar={conversation.avatar} 
-          onOptionSelect={handleOptionClick} // ✅ Se pasa correctamente la función
+          onOptionSelect={handleOptionClick} 
         />
         <ChatFooter />
         

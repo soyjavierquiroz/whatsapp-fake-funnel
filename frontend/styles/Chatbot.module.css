@@ -1,4 +1,4 @@
-/* 📌 Animacion Escribiendo */
+/* 📌 Animación Escribiendo */
 .typingIndicator {
   display: flex;
   gap: 5px;
@@ -18,51 +18,49 @@
   100% { opacity: 0.3; transform: translateY(0px); }
 }
 
-
 /* 📌 Contenedor principal */
 .chatWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background: url('/fondo.png') no-repeat center center;
-  background-size: cover;
+  background: rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
 
 /* 📌 Contenedor del chat */
 .chatContainer {
   width: 100%;
-  max-width: 500px;
-  height: 100vh;
+  max-width: 400px;
+  height: 100%;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
   background: white;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  overflow-x: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
 /* 📌 Cabecera */
 .chatHeader {
   width: 100%;
-  max-width: 500px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px; /* Reducimos el padding para hacer la cabecera más compacta */
+  padding: 8px 12px;
   background: var(--primary-color);
   color: white;
-  box-sizing: border-box;
 }
 
 /* Contenedor del lado izquierdo */
 .headerLeft {
   display: flex;
   align-items: center;
-  gap: 8px; /* Espaciado entre los elementos */
+  gap: 8px;
 }
 
 /* Botón de retroceso */
@@ -88,13 +86,12 @@
 
 .userInfo strong {
   font-size: 18px;
-  font-weight: bold;
 }
 
 .userInfo p {
   font-size: 12px;
   color: #d1d1d1;
-  margin-top: 2px; /* Reducimos el espacio entre el nombre y "Online" */
+  margin-top: 2px;
 }
 
 /* Iconos de la derecha */
@@ -105,23 +102,17 @@
   align-items: center;
 }
 
-.icon {
-  display: flex;
-  align-items: center;
-}
-
-
-
 /* 📌 Cuerpo del chat */
 .chatBody {
   flex: 1;
   overflow-y: auto;
   padding: 15px;
+  font-size: 16px;
+  min-height: 80vh;
   background: url('/background.png') no-repeat center center, var(--chat-bg);
   background-size: cover;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding-top: 20px; /* ✅ Evita que el primer mensaje quede oculto debajo de la cabecera */
 }
 
 .chatBody::-webkit-scrollbar {
@@ -135,32 +126,25 @@
   margin-bottom: 10px;
 }
 
-.messageWrapper.bot {
-  justify-content: flex-start;
-}
-
-.messageWrapper.user {
-  justify-content: flex-end;
-}
+.messageWrapper.bot { justify-content: flex-start; }
+.messageWrapper.user { justify-content: flex-end; }
 
 /* 📌 Estilos de los mensajes */
 .chatBubble {
   max-width: 80%;
-  padding: 6px 10px; /* 🔹 Reducimos el padding interno */
+  padding: 6px 10px;
   border-radius: 10px;
-  margin-bottom: 3px; /* 🔹 Reducido para acercar mensajes */
+  margin-bottom: 3px;
   word-wrap: break-word;
   color: black;
 }
 
 .chatBubble.user {
   background: #dcf8c6;
-  color: #000000;
 }
 
 .chatBubble.bot {
   background: #ffffff;
-  color: #000000;
 }
 
 /* 📌 Imagen dentro del mensaje */
@@ -180,13 +164,14 @@
 
 /* 📌 Pie de chat */
 .chatFooter {
+  padding: 10px;
+  background: #f1f1f1;
+  text-align: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 10px;
-  background: white;
-  border-top: 1px solid #ddd;
   gap: 10px;
+  border-top: 1px solid #ddd;
 }
 
 /* 📌 Botones en el pie del chat */
@@ -201,45 +186,20 @@
   cursor: pointer;
   font-size: 14px;
   text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .chatFooter button:hover {
   background: #064e45;
 }
 
-/* 📌 Ajustes en móviles */
-@media (max-width: 600px) {
-  .chatContainer {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .chatHeader {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .chatBody {
-    padding: 15px 10px;
-  }
-
-  .chatFooter button {
-    min-width: 48%;
-    font-size: 13px;
-    padding: 10px;
-  }
-}
-
-/* 🔹 Contenedor de la miniatura del video */
+/* 📌 Contenedor de la miniatura del video */
 .videoThumbnail {
   position: relative;
   cursor: pointer;
   display: inline-block;
 }
 
-/* 🔹 Botón de "play" sobre la miniatura */
+/* 📌 Botón de "play" sobre la miniatura */
 .videoPlayButton {
   position: absolute;
   top: 50%;
@@ -254,47 +214,7 @@
   cursor: pointer;
 }
 
-/* 🔹 Ajuste de altura para móviles */
-.chatWrapper {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100dvh; /* Evita solapamientos con la barra del navegador */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-/* 🔹 Asegurar que el chat ocupa el espacio visible */
-.chatContainer {
-  background: #ffffff;
-  width: 100%;
-  max-width: 400px;
-  height: 100%;
-  max-height: 100dvh; /* Evita que se corte en móviles */
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-/* 🔹 Ajuste del cuerpo del chat */
-.chatBody {
-  flex: 1;
-  overflow-y: auto;
-  padding: 15px;
-  font-size: 16px; /* ⬆ Incremento en 2px */
-}
-
-/* 🔹 Ajuste del footer */
-.chatFooter {
-  padding: 10px;
-  background: #f1f1f1;
-  text-align: center;
-}
-
-/* 🔹 Contenedor de botones de acción */
+/* 📌 Contenedor de botones de acción */
 .actionButtons {
   display: flex;
   flex-wrap: wrap;
@@ -304,7 +224,7 @@
   padding: 10px;
 }
 
-/* 🔹 Botones de opción */
+/* 📌 Botones de opción */
 .optionButton {
   background-color: #2a8b7b;
   color: white;
@@ -322,6 +242,24 @@
 
 /* 📌 Ajustes en móviles */
 @media (max-width: 600px) {
+  .chatContainer {
+    max-width: 100%;
+  }
+
+  .chatHeader {
+    max-width: 100%;
+  }
+
+  .chatBody {
+    padding: 15px 10px;
+  }
+
+  .chatFooter button {
+    min-width: 48%;
+    font-size: 13px;
+    padding: 10px;
+  }
+
   .optionButton {
     font-size: 14px;
     padding: 10px 14px;
