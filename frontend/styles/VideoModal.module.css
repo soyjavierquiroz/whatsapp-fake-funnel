@@ -39,15 +39,15 @@
 
 /* 🔹 Título del modal */
 .modalTitle {
-  font-size: 28px; /* 🔹 Ajustado para escritorio */
+  font-size: 28px;
   font-weight: bold;
-  margin-bottom: 3px; /* 🔹 Se redujo el margen */
+  margin-bottom: 3px;
 }
 
 /* 🔹 Subtítulo del modal */
 .modalSubtitle {
   font-size: 18px;
-  margin-bottom: 5px; /* 🔹 Se redujo el margen */
+  margin-bottom: 5px;
   opacity: 0.8;
 }
 
@@ -59,7 +59,6 @@
   border-radius: 5px;
   object-fit: contain;
 }
-
 
 /* 🔹 Contenedor del botón CTA */
 .ctaContainer {
@@ -103,8 +102,16 @@
 
 /* 🔹 Ajustes específicos para móviles */
 @media (max-width: 768px) {
-  .videoFrame {
+  .modalContainer {
     height: 90vh;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .videoFrame {
+    height: 90%;
     width: 100%;
   }
 
@@ -113,18 +120,10 @@
   }
 
   .modalTitle {
-    font-size: 24px; /* 🔹 4 puntos menos en móviles */
+    font-size: 24px;
   }
 
   .modalSubtitle {
-    font-size: 16px; /* 🔹 2 puntos menos en móviles */
-  }
-
-  .videoFrame {
-    height: 250px;
-  }
-
-  .ctaButton {
-    max-width: 200px;
+    font-size: 16px;
   }
 }

@@ -13,7 +13,7 @@ export default function VideoModal({ videoUrl, title, subtitle, ctaText, ctaLink
   }, []);
 
   useEffect(() => {
-    // 🔹 Mostrar el botón CTA después de 4 segundos (configurable)
+    // 🔹 Mostrar el botón CTA después de 4 segundos
     const timer = setTimeout(() => {
       setShowCTA(true);
     }, 4000);
@@ -22,7 +22,7 @@ export default function VideoModal({ videoUrl, title, subtitle, ctaText, ctaLink
   }, []);
 
   useEffect(() => {
-    // 🔹 Cambiar a Bunny.net en móviles si no es YouTube
+    // 🔹 En móviles, usar Bunny.net si el video no es de YouTube
     if (isMobile) {
       setFinalVideoUrl(
         "https://iframe.mediadelivery.net/embed/161095/f9a1fb53-dd48-46b2-bea3-275cdc7d8b16?autoplay=false&loop=true&muted=false&preload=true&responsive=false"
@@ -52,7 +52,7 @@ export default function VideoModal({ videoUrl, title, subtitle, ctaText, ctaLink
           <p className={styles.modalSubtitle}>⚠️ Error: No hay un video disponible.</p>
         )}
 
-        {/* 🔹 Botón CTA (ahora se muestra correctamente) */}
+        {/* 🔹 Botón CTA */}
         <div className={styles.ctaContainer}>
           {showCTA && ctaText && ctaLink && (
             <a href={ctaLink} target="_blank" rel="noopener noreferrer">
