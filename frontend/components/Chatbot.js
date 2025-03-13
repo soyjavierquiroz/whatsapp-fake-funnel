@@ -17,9 +17,8 @@ export default function Chatbot() {
   ]);
 
   const [currentStep, setCurrentStep] = useState(0);
-  const [showForm, setShowForm] = useState(false); // 🔹 Estado para el formulario
+  const [showForm, setShowForm] = useState(false);
   const chatBodyRef = useRef(null);
-
   const [videoUrl, setVideoUrl] = useState(null);
 
   useEffect(() => {
@@ -28,16 +27,28 @@ export default function Chatbot() {
     }
   }, [messages]);
 
+  // 🔹 Función para manejar la selección de opciones
   const handleOptionClick = (text, nextStep) => {
     const step = Number(nextStep);
     if (isNaN(step) || step < 0) return console.error("🚨 ERROR: nextStep no es válido.");
 
-    SoundPlayer("sent"); // 🔹 Sonido de mensaje enviado
-    setMessages(prev => [...prev, { text, sender: "user" }]);
-    setCurrentStep(null);
+    SoundPlayer("sent"); 
+
+    // 🔹 Eliminamos las opciones antes de agregar "escribiendo..."
+    setMessages(prev => {
+      const updatedMessages = prev.map((msg, index) =>
+        index === prev.length - 1 ? { ...msg, options: [] } : msg
+      );
+      return [...updatedMessages, { text, sender: "user" }];
+    });
+
+    setCurrentStep(null); // 🔹 Limpiamos el estado de opciones antes del typing
 
     setTimeout(() => {
-      setMessages(prev => [...prev, { sender: "bot", typing: true }]);
+      setMessages(prev => [
+        ...prev, 
+        { sender: "bot", typing: true } // 🔹 Se muestra escribiendo después de limpiar opciones
+      ]);
 
       setTimeout(() => {
         const nextMessage = conversation.messages[step];
@@ -45,9 +56,9 @@ export default function Chatbot() {
           return console.error("🚨 ERROR: No se encontró un mensaje.");
         }
 
-        SoundPlayer("received"); // 🔹 Sonido de mensaje recibido
+        SoundPlayer("received"); 
 
-        setMessages(prev => prev.filter(msg => !msg.typing));
+        setMessages(prev => prev.filter(msg => !msg.typing)); // 🔹 Quitar el estado de typing
         setMessages(prev => [
           ...prev,
           {
@@ -74,33 +85,21 @@ export default function Chatbot() {
     }, 500);
   };
 
-  const openVideoModal = (url) => {
-    setVideoUrl(url);
-  };
-
-  const closeVideoModal = () => {
-    setVideoUrl(null);
-  };
-
   return (
     <div className={styles.chatWrapper}>
       <div className={styles.chatContainer}>
         <ChatHeader avatar={conversation.avatar} name={conversation.name} />
         <ChatBody 
           messages={messages} 
-          chatBodyRef={chatBodyRef} 
           avatar={conversation.avatar} 
-          onOpenVideo={openVideoModal} 
+          onOptionSelect={handleOptionClick} // ✅ Se pasa correctamente la función
         />
-        <ChatFooter 
-          options={currentStep !== null ? conversation.messages[currentStep]?.options : []} 
-          onOptionClick={handleOptionClick} 
-        />
+        <ChatFooter />
         
         {showForm && <UserForm onSubmit={(data) => console.log("Formulario enviado:", data)} />}
       </div>
 
-      {videoUrl && <VideoModal videoUrl={videoUrl} onClose={closeVideoModal} />}
+      {videoUrl && <VideoModal videoUrl={videoUrl} onClose={() => setVideoUrl(null)} />}
     </div>
   );
 }
